@@ -1,40 +1,25 @@
 # Mohamed El-Haddady — Portfolio
 
-A bilingual (EN/FR) portfolio built with Next.js 14, TypeScript, TailwindCSS and Framer Motion.
+Personal portfolio: a single static page, no build step.
 
-## Getting started
+- Three languages: English, French and Arabic (right-to-left)
+- Light and dark mode (follows the device setting, then remembers the visitor's choice)
+- Responsive from phones to desktops
 
-```bash
-npm install
-npm run dev
-```
+## Files
 
-Open http://localhost:3000.
+- `index.html` — all content, styles and scripts
+- `netlify.toml` — Netlify config (publishes the repo root)
+- `favicon.svg`
 
 ## Add your photo
 
-Drop your professional photo into `public/profile.jpg` (square image, at least 500x500px works best).
-Until then, the hero shows a monogram placeholder automatically — no code changes needed.
+Put a portrait photo named `profile.jpg` next to `index.html` (4:5 ratio works best, e.g. 800×1000). It replaces the placeholder automatically.
 
-## Add your CV
+## Edit the text
 
-Drop your CV as `public/Mohamed-El-Haddady-CV.pdf` — the "Download CV" buttons already link to it.
+English is the text inside each element; French is in its `data-fr` attribute and Arabic in `data-ar`, so all three are edited in one place.
 
-## Edit your content
+## Run locally
 
-- `lib/data.ts` — projects, experience, education, skills, contact info
-- `lib/i18n/translations.ts` — all EN/FR UI copy (headline, section intros, labels)
-
-## Wire up real GitHub stats (optional)
-
-`components/sections/GithubStats.tsx` currently shows a stylised placeholder heatmap and static
-counters. To show live data, fetch from the GitHub REST API
-(`https://api.github.com/users/<username>`) in a server component and pass the numbers down.
-
-## Deploy
-
-This is a standard Next.js app — deploys cleanly to Vercel (`vercel deploy`), Netlify, or any Node host.
-
-## Tech stack
-
-Next.js 14 (App Router) · TypeScript · TailwindCSS · Framer Motion · lucide-react
+`python -m http.server`, then open http://localhost:8000.

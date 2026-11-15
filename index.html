@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohamed El-Haddady — Data Science & Intelligent Systems</title>
+<meta name="description" content="Portfolio of Mohamed El-Haddady, data science and intelligent systems student at EST Dakhla. Python, R, SQL, data management and reporting, web development.">
+<meta property="og:title" content="Mohamed El-Haddady — Data Science & Intelligent Systems">
+<meta property="og:description" content="Data science student in Dakhla, Morocco. Field data, reporting, numerical simulation and web applications.">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script>
+// Apply saved theme and language before first paint.
+(function(){
+  var d=document.documentElement, t=null, l=null;
+  try{t=localStorage.getItem('theme'); l=localStorage.getItem('lang');}catch(e){}
+  if(!t) t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  d.setAttribute('data-theme',t);
+  if(!l){var n=(navigator.language||'en').slice(0,2).toLowerCase(); l=(n==='fr'||n==='ar')?n:'en';}
+  d.lang=l; d.dir=l==='ar'?'rtl':'ltr';
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7fa; --bg2:#eaeef4; --card:#ffffff; --ink:#0f1b2d; --text:#33425a; --muted:#64748b; --line:#d7dee8;
+  --accent:#0f8f7f; --accent-ink:#ffffff; --accent-soft:#d9f3ee; --accent2:#4f46e5; --shadow:0 10px 30px -18px rgba(15,27,45,.35);
+  --display:"Space Grotesk","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --sans:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono","IBM Plex Sans Arabic",ui-monospace,Consolas,monospace;
+}
+[data-theme="dark"]{
+  --bg:#0a111e; --bg2:#0f192b; --card:#121d31; --ink:#eef3fb; --text:#b9c5d8; --muted:#8696ae; --line:#24324a;
+  --accent:#2dd4bf; --accent-ink:#06211d; --accent-soft:#11302f; --accent2:#a5b4fc; --shadow:0 10px 30px -18px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:clamp(15.5px,.35vw + 14.5px,17px);line-height:1.65;-webkit-font-smoothing:antialiased;transition:background-color .25s,color .25s;overflow-x:hidden}
+[lang="ar"] body{line-height:1.9}
+[lang="ar"] *{letter-spacing:0 !important}
+a{color:inherit}
+img,svg{max-width:100%}
+.wrap{width:min(1120px,100% - clamp(32px,6vw,80px));margin-inline:auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);color:var(--ink);margin:0;overflow-wrap:anywhere}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.nb{white-space:nowrap}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:14px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;color:var(--ink);text-decoration:none;margin-inline-end:auto;white-space:nowrap}
+.brand i{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-style:normal;font-size:15px}
+.links{display:flex;gap:4px;align-items:center}
+.links a{font-size:14px;text-decoration:none;color:var(--muted);padding:8px 11px;border-radius:8px}
+.links a:hover{color:var(--ink);background:var(--bg2)}
+.tools{display:flex;align-items:center;gap:8px}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--card)}
+.seg button{font:500 12px var(--mono);border:0;background:none;color:var(--muted);padding:5px 9px;border-radius:999px;cursor:pointer;min-width:34px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.icon-btn{display:grid;place-items:center;width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;flex:none}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.icon-btn svg{width:18px;height:18px}
+[data-theme="dark"] .i-moon,[data-theme="light"] .i-sun{display:none}
+#menu{display:none}
+@media(max-width:900px){
+  #menu{display:grid}
+  .links{position:absolute;inset-inline:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px clamp(16px,3vw,40px) 14px;display:none}
+  .links.open{display:flex}
+  .links a{padding:13px 8px;font-size:16px;border-bottom:1px solid var(--line);border-radius:0}
+  .links a:last-child{border-bottom:0}
+}
+@media(max-width:420px){.brand span{display:none}}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(40px,7vw,96px) 0 clamp(28px,4vw,48px)}
+.pill{display:inline-flex;align-items:center;gap:8px;font:500 13px var(--mono);color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin:0 0 20px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+h1{font-weight:700;font-size:clamp(38px,6.4vw,74px);line-height:1.04;letter-spacing:-.03em}
+[lang="ar"] h1{line-height:1.3}
+.role{font-family:var(--display);font-weight:600;font-size:clamp(19px,2.4vw,27px);line-height:1.3;margin:14px 0 18px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,1.5vw,19px);max-width:60ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:500;font-size:15px;text-decoration:none;padding:12px 20px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);overflow-wrap:anywhere;text-align:center}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08);color:var(--accent-ink)}
+
+.photo-wrap{position:relative;justify-self:center;width:min(100%,360px)}
+.photo-wrap::before{content:"";position:absolute;inset:18px -18px -18px 18px;border-radius:26px;background:linear-gradient(135deg,var(--accent),var(--accent2));opacity:.22}
+[dir="rtl"] .photo-wrap::before{inset:18px 18px -18px -18px}
+.photo{position:relative;aspect-ratio:4/5;border-radius:26px;overflow:hidden;background:var(--bg2);border:2px dashed var(--line);display:grid;place-items:center;box-shadow:var(--shadow)}
+.photo.has-img{border-style:solid;border-color:var(--card)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph{display:grid;justify-items:center;gap:8px;color:var(--muted);text-align:center;padding:20px}
+.ph svg{width:64px;height:64px;opacity:.7}
+.ph b{font-family:var(--display);color:var(--ink);font-weight:600}
+.ph code{font:12px var(--mono);background:var(--card);border:1px solid var(--line);padding:2px 8px;border-radius:6px}
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .photo-wrap{order:-1;width:min(62%,250px);justify-self:start}
+  .photo{border-radius:20px}
+  .photo-wrap::before{inset:12px -12px -12px 12px;border-radius:20px}
+  [dir="rtl"] .photo-wrap::before{inset:12px 12px -12px -12px}
+}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:8px}
+.stats div{background:var(--card);padding:clamp(14px,2vw,22px)}
+.stats b{display:block;font-family:var(--display);font-size:clamp(24px,3vw,34px);color:var(--ink);line-height:1.1}
+.stats span{font-size:13.5px;color:var(--muted)}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- project visuals ---------- */
+.viz{direction:ltr;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:18px;overflow:hidden}
+.viz svg{display:block;width:100%;height:auto}
+.viz.crop svg{height:clamp(84px,15vw,150px)}
+.viz text{font:500 13px var(--sans);fill:var(--muted);text-anchor:middle}
+.viz .eq{font:12px var(--mono);color:var(--muted);margin:4px 0 0}
+.c-base{stroke:var(--line)} .c-path{stroke:var(--accent);vector-effect:non-scaling-stroke} .c-wheel,.c-spoke{stroke:var(--muted)} .c-dot{fill:var(--accent2)}
+/* request flow (Mowatin) */
+.v-track{stroke:var(--line);stroke-width:3}
+.v-prog{stroke:var(--accent);stroke-width:3;stroke-dasharray:260;animation:vprog 7s infinite}
+.v-node{fill:var(--accent);stroke:var(--accent);stroke-width:2}
+.v-node.n2{animation:vn2 7s infinite}.v-node.n3{animation:vn3 7s infinite}
+.v-check{fill:none;stroke:var(--accent-ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;animation:vchk 7s infinite}
+.v-doc{animation:vdoc 7s infinite}
+.v-doc rect{fill:var(--card);stroke:var(--ink);stroke-width:1.5}.v-doc path{stroke:var(--muted);stroke-width:1.5;stroke-linecap:round}
+@keyframes vprog{0%,10%{stroke-dashoffset:260}35%,45%{stroke-dashoffset:130}70%,100%{stroke-dashoffset:0}}
+@keyframes vdoc{0%,10%{transform:translateX(0)}35%,45%{transform:translateX(130px)}70%,100%{transform:translateX(260px)}}
+@keyframes vn2{0%,33%{fill:var(--card);stroke:var(--line)}36%,100%{fill:var(--accent);stroke:var(--accent)}}
+@keyframes vn3{0%,68%{fill:var(--card);stroke:var(--line)}71%,100%{fill:var(--accent);stroke:var(--accent)}}
+@keyframes vchk{0%,70%{opacity:0}74%,100%{opacity:1}}
+/* RFID tap */
+.r-reader{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.r-dot{fill:var(--accent)}
+.r-wave{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;animation:rwave 1.4s infinite}
+.r-wave.w2{animation-delay:.2s}.r-wave.w3{animation-delay:.4s}
+.r-led{fill:var(--accent);animation:rled 4s infinite}
+.r-card{animation:rcard 4s infinite}
+.r-card rect{fill:var(--accent2);opacity:.9}.r-card .chip{fill:var(--card);opacity:1}.r-card path{stroke:var(--card);stroke-width:2;stroke-linecap:round}
+.r-box{fill:var(--card);stroke:var(--line);stroke-width:1.5}.r-row{stroke:var(--line);stroke-width:5;stroke-linecap:round}
+.r-tick{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.r-tick.t1{animation:rt1 12s infinite}.r-tick.t2{animation:rt2 12s infinite}.r-tick.t3{animation:rt3 12s infinite}
+@keyframes rwave{0%,100%{opacity:.15}50%{opacity:1}}
+@keyframes rcard{0%{transform:translateX(0)}30%,55%{transform:translateX(-58px)}85%,100%{transform:translateX(0)}}
+@keyframes rled{0%,30%{fill:var(--line)}33%,60%{fill:var(--accent)}63%,100%{fill:var(--line)}}
+@keyframes rt1{0%,10%{opacity:0}12%,96%{opacity:1}100%{opacity:0}}
+@keyframes rt2{0%,43%{opacity:0}45%,96%{opacity:1}100%{opacity:0}}
+@keyframes rt3{0%,77%{opacity:0}79%,96%{opacity:1}100%{opacity:0}}
+/* dashboard */
+.d-axis{stroke:var(--line);stroke-width:1.5}.d-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:3 5}
+.d-bar{fill:var(--accent);transform-box:fill-box;transform-origin:bottom;animation:dbar 7s infinite}
+.d-bar:nth-of-type(even){fill:var(--accent2)}
+.d-line{fill:none;stroke:var(--accent2);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;animation:dline 7s infinite}
+.d-pt{fill:var(--accent2);animation:dpt 7s infinite}
+.d-ring{fill:none;stroke:var(--line);stroke-width:12}
+.d-arc{fill:none;stroke:var(--accent);stroke-width:12;stroke-linecap:round;stroke-dasharray:70 100;animation:darc 7s infinite}
+@keyframes dbar{0%{transform:scaleY(0)}18%,92%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+@keyframes dline{0%,12%{stroke-dashoffset:1}45%,92%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes dpt{0%,44%{opacity:0}48%,92%{opacity:1}100%{opacity:0}}
+@keyframes darc{0%,20%{stroke-dashoffset:70}55%,92%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@media(prefers-reduced-motion:reduce){.viz *{animation:none !important}}
+
+/* ---------- sections ---------- */
+section{padding:clamp(44px,6vw,80px) 0;scroll-margin-top:70px}
+.sec-head{margin-bottom:clamp(22px,3vw,36px)}
+.sec-head .n{font:500 13px var(--mono);color:var(--accent);display:block;margin-bottom:6px}
+h2{font-weight:700;font-size:clamp(27px,3.8vw,40px);letter-spacing:-.02em;line-height:1.15}
+h3{font-weight:600;font-size:clamp(18px,1.8vw,21px);line-height:1.3;margin:0 0 4px}
+
+.about{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.about p{margin:0 0 16px}
+.facts{list-style:none;margin:0;padding:6px 20px;background:var(--card);border:1px solid var(--line);border-radius:16px;align-self:start}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+.facts li:last-child{border-bottom:0}
+.facts span:first-child{color:var(--muted);font-size:13.5px;flex:none}
+.facts span:last-child{text-align:end;color:var(--ink);font-weight:500}
+@media(max-width:820px){.about{grid-template-columns:1fr}}
+
+.tl{position:relative;display:grid;gap:16px}
+.item{display:grid;grid-template-columns:170px minmax(0,1fr);gap:clamp(14px,3vw,32px);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2.6vw,28px)}
+.item:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.when{font:13px var(--mono);color:var(--muted);padding-top:4px}
+.now{display:inline-block;margin-top:8px;font:500 11px var(--mono);background:var(--accent-soft);color:var(--accent);padding:3px 9px;border-radius:999px}
+.where{color:var(--accent);font-weight:500;margin:0 0 10px;font-size:15px}
+.desc{margin:0 0 14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
+.tags li{font:12.5px var(--mono);border:1px solid var(--line);background:var(--bg);padding:3px 10px;border-radius:999px;color:var(--text)}
+@media(max-width:700px){.item{grid-template-columns:1fr;gap:6px}.now{margin:0 8px}}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}
+.proj:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow)}
+.proj.wide{grid-column:1/-1}
+.kind{font:500 12.5px var(--mono);color:var(--accent);margin:0 0 10px}
+.proj .desc{flex:1;margin-top:6px}
+.pts{margin:0 0 16px;padding-inline-start:20px}
+.pts li{margin-bottom:4px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.skills>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.skills h3{font-size:15px;margin-bottom:12px}
+@media(max-width:900px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.skills{grid-template-columns:1fr}}
+
+.contact{background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:24px;padding:clamp(28px,5vw,60px);color:#fff}
+[data-theme="dark"] .contact{background:linear-gradient(135deg,#0f766e,#3730a3)}
+.contact h2{color:#fff;font-size:clamp(28px,4.6vw,46px);margin-bottom:12px}
+.contact p{max-width:56ch;margin:0 0 24px;color:rgba(255,255,255,.88)}
+.contact .btn{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff}
+.contact .btn:hover{background:rgba(255,255,255,.22);color:#fff;border-color:#fff}
+.contact .btn.primary{background:#fff;color:#0f1b2d;border-color:#fff;filter:none}
+@media(max-width:520px){.contact .cta .btn{width:100%}}
+footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i>M</i><span data-fr="Mohamed El-Haddady" data-ar="محمد الحدادي">Mohamed El-Haddady</span></a>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#about" data-fr="À propos" data-ar="نبذة عني">About</a>
+      <a href="#experience" data-fr="Expérience" data-ar="الخبرة">Experience</a>
+      <a href="#projects" data-fr="Projets" data-ar="المشاريع">Projects</a>
+      <a href="#education" data-fr="Formation" data-ar="الدراسة">Education</a>
+      <a href="#skills" data-fr="Compétences" data-ar="المهارات">Skills</a>
+      <a href="#contact" data-fr="Contact" data-ar="تواصل">Contact</a>
+    </nav>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" data-lang="ar" aria-pressed="false" aria-label="العربية">ع</button>
+      </div>
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" id="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <p class="pill" data-fr="Dakhla, Maroc" data-ar="الداخلة، المغرب">Dakhla, Morocco</p>
+      <h1 data-fr="Mohamed <span class='nb'>El-Haddady</span>" data-ar="محمد الحدادي">Mohamed <span class="nb">El-Haddady</span></h1>
+      <p class="role" data-fr="Étudiant en Science des Données et Systèmes Intelligents" data-ar="طالب في علوم البيانات والأنظمة الذكية">Data Science &amp; Intelligent Systems student</p>
+      <p class="lede" data-fr="Je transforme des données de terrain en suivi clair et en rapports utiles. Formé en informatique et en mathématiques appliquées, j'étudie aujourd'hui la science des données à l'EST Dakhla et je l'applique chaque jour à des données réelles." data-ar="أحوّل البيانات الميدانية إلى متابعة واضحة وتقارير مفيدة. تكويني يجمع بين المعلوميات والرياضيات التطبيقية، وأدرس اليوم علوم البيانات بالمدرسة العليا للتكنولوجيا بالداخلة وأطبّقها يوميًا على بيانات حقيقية.">I turn field data into clear tracking and useful reports. Trained in computer science and applied mathematics, I now study data science at EST Dakhla and apply it to real data every day.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects" data-fr="Voir mes projets" data-ar="شاهد مشاريعي">See my projects</a>
+        <a class="btn" href="#contact" data-fr="Me contacter" data-ar="تواصل معي">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- Photo: add a file named profile.jpg next to index.html and it replaces this placeholder automatically. -->
+    <div class="photo-wrap">
+      <div class="photo" id="photo">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.2-4 4.3-6 8-6s6.8 2 8 6"/></svg>
+          <b data-fr="Votre photo ici" data-ar="صورتك هنا">Your photo here</b>
+          <code class="ltr">profile.jpg</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div><b class="ltr">5</b><span data-fr="ans d'études en informatique, maths et data" data-ar="سنوات دراسة في المعلوميات والرياضيات والبيانات">years studying computing, maths and data</span></div>
+    <div><b class="ltr">4</b><span data-fr="projets, du calcul numérique au web" data-ar="مشاريع، من الحساب العددي إلى الويب">projects, from numerical computing to web</span></div>
+    <div><b class="ltr">2</b><span data-fr="stages en développement web" data-ar="تدريبان في تطوير الويب">web development internships</span></div>
+    <div><b class="ltr">3</b><span data-fr="langues : arabe, anglais, français" data-ar="لغات: العربية، الإنجليزية، الفرنسية">languages: Arabic, English, French</span></div>
+  </div>
+
+  <section id="about">
+    <div class="sec-head"><span class="n ltr">01</span><h2 data-fr="À propos" data-ar="نبذة عني">About</h2></div>
+    <div class="about">
+      <div>
+        <p data-fr="Mon parcours réunit deux domaines : l'informatique, avec un DUT à l'EST de Guelmim, et les mathématiques appliquées à l'intelligence des machines, avec une Licence d'Excellence puis une première année de Master à la Faculté Polydisciplinaire de Nador." data-ar="يجمع مساري بين مجالين: المعلوميات، بدبلوم جامعي للتكنولوجيا من المدرسة العليا للتكنولوجيا بكلميم، والرياضيات التطبيقية في ذكاء الآلة، بإجازة التميز ثم سنة أولى ماستر بالكلية المتعددة التخصصات بالناظور.">My path brings two fields together: computer science, with a DUT from EST Guelmim, and applied mathematics for machine intelligence, with a Licence d'Excellence followed by a first year of Master's at the Faculté Polydisciplinaire de Nador.</p>
+        <p data-fr="Aujourd'hui, j'étudie la science des données et les systèmes intelligents à l'EST Dakhla. En parallèle, je travaille au port de Dakhla sur la collecte, la gestion et le suivi des données du département HSE, ainsi que sur ses rapports et présentations." data-ar="أدرس اليوم علوم البيانات والأنظمة الذكية بالمدرسة العليا للتكنولوجيا بالداخلة. وبالموازاة أعمل بميناء الداخلة على جمع بيانات قسم الصحة والسلامة والبيئة وتدبيرها ومتابعتها، وعلى إعداد تقاريره وعروضه.">Today I study data science and intelligent systems at EST Dakhla. Alongside, I work at the Port of Dakhla on collecting, managing and tracking the HSE department's data, and on its reports and presentations.</p>
+        <p data-fr="Mon objectif : utiliser Python, R, SQL et les statistiques pour rendre les données plus fiables, plus faciles à suivre et plus utiles à ceux qui décident." data-ar="هدفي: استعمال Python و R و SQL والإحصاء لجعل البيانات أكثر موثوقية وأسهل في التتبع وأكثر فائدة لمن يتخذ القرار.">My goal: use Python, R, SQL and statistics to make data more reliable, easier to track, and more useful to the people who decide.</p>
+      </div>
+      <ul class="facts">
+        <li><span data-fr="Basé à" data-ar="الإقامة">Based in</span><span data-fr="Dakhla, Maroc" data-ar="الداخلة، المغرب">Dakhla, Morocco</span></li>
+        <li><span data-fr="Études" data-ar="الدراسة">Studying</span><span data-fr="Bachelor SDSI, EST Dakhla" data-ar="بكالوريوس SDSI، EST الداخلة">Bachelor SDSI, EST Dakhla</span></li>
+        <li><span data-fr="Domaine" data-ar="المجال">Focus</span><span data-fr="Données, reporting, IA" data-ar="البيانات، التقارير، الذكاء الاصطناعي">Data, reporting, AI</span></li>
+        <li><span data-fr="Langues" data-ar="اللغات">Languages</span><span data-fr="Arabe, anglais, français" data-ar="العربية، الإنجليزية، الفرنسية">Arabic, English, French</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><span class="n ltr">02</span><h2 data-fr="Expérience" data-ar="الخبرة">Experience</h2></div>
+    <div class="tl">
+
+      <div class="item">
+        <div class="when"><span data-fr="Poste actuel" data-ar="المنصب الحالي">Current role</span><span class="now" data-fr="EN COURS" data-ar="حاليًا">NOW</span></div>
+        <div>
+          <h3 data-fr="Données et reporting HSE" data-ar="بيانات وتقارير الصحة والسلامة والبيئة (HSE)">HSE Data &amp; Reporting</h3>
+          <p class="where" data-fr="Département HSE · Port de Dakhla" data-ar="قسم HSE · ميناء الداخلة">HSE department · Port of Dakhla</p>
+          <p class="desc" data-fr="Collecte, structuration et gestion des données du département, suivi des dossiers et des indicateurs, et préparation des rapports et présentations. Planification des séances de sensibilisation sécurité à partir d'un calendrier suivi sous tableur." data-ar="جمع بيانات القسم وتنظيمها وتدبيرها، ومتابعة الملفات والمؤشرات، وإعداد التقارير والعروض. تخطيط حصص التوعية بالسلامة اعتمادًا على جدول زمني في جداول البيانات.">Collect, structure and manage the department's data, follow up on records and indicators, and prepare reports and presentations. Plan safety awareness sessions from a schedule tracked in spreadsheets.</p>
+          <ul class="tags"><li data-fr="Collecte de données" data-ar="جمع البيانات">Data collection</li><li data-fr="Gestion de données" data-ar="تدبير البيانات">Data management</li><li data-fr="Reporting" data-ar="إعداد التقارير">Reporting</li><li class="ltr">Excel</li></ul>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="when" data-fr="Avr. — Juin 2023" data-ar="أبريل — يونيو 2023">Apr — Jun 2023</div>
+        <div>
+          <h3 data-fr="Développeur web stagiaire" data-ar="متدرب في تطوير الويب">Web Developer Intern</h3>
+          <p class="where" data-fr="Commune de Ghafsai · stage de fin d'études (DUT)" data-ar="جماعة غفساي · تدريب نهاية الدراسة (DUT)">Commune of Ghafsai · DUT final-year internship</p>
+          <p class="desc" data-fr="Conception et développement, en autonomie, de Mowatin : une application web pour déposer, suivre et traiter en ligne les demandes de documents administratifs." data-ar="تصميم وتطوير تطبيق «مواطن» بشكل مستقل: تطبيق ويب لإيداع طلبات الوثائق الإدارية وتتبعها ومعالجتها عبر الإنترنت.">Designed and built Mowatin on my own: a web application for submitting, tracking and processing administrative document requests online.</p>
+          <ul class="tags ltr"><li>Laravel</li><li>PHP</li><li>JavaScript</li><li>Bootstrap</li><li>MySQL</li></ul>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="when" data-fr="Juin — Juil. 2022" data-ar="يونيو — يوليوز 2022">Jun — Jul 2022</div>
+        <div>
+          <h3 data-fr="Stagiaire web" data-ar="متدرب ويب">Web Intern</h3>
+          <p class="where"><span class="ltr">Atlanta Sanad Assurance</span></p>
+          <p class="desc" data-fr="Création d'un blog WordPress pour l'agence afin de renforcer sa communication et sa présence en ligne." data-ar="إنشاء مدونة WordPress للوكالة لتعزيز تواصلها وحضورها على الإنترنت.">Built a WordPress blog for the agency to strengthen its communication and online presence.</p>
+          <ul class="tags ltr"><li>WordPress</li><li>CMS</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head"><span class="n ltr">03</span><h2 data-fr="Projets" data-ar="المشاريع">Projects</h2></div>
+    <div class="grid">
+
+      <article class="proj wide">
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 1000 150" preserveAspectRatio="xMidYMid meet">
+            <line class="c-base" x1="0" y1="130" x2="1000" y2="130" stroke-width="1"/>
+            <path class="c-path" id="cycPath" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+            <circle class="c-wheel" id="cycWheel" r="50" fill="none" stroke-width="1" stroke-dasharray="3 4"/>
+            <line class="c-spoke" id="cycSpoke" stroke-width="1"/>
+            <circle class="c-dot" id="cycDot" r="6"/>
+          </svg>
+          <p class="eq">x = r(t − sin t), y = r(1 − cos t)</p>
+        </div>
+        <p class="kind" data-fr="Mathématiques appliquées · Python" data-ar="رياضيات تطبيقية · Python">Applied mathematics · Python</p>
+        <h3 data-fr="Simulation du mouvement sur une cycloïde" data-ar="محاكاة الحركة على منحنى الدويري">Cycloid motion simulation</h3>
+        <p class="desc" data-fr="Simulation en Python du mouvement sur une cycloïde, modélisé par une équation différentielle ordinaire. J'y implémente et compare cinq méthodes numériques, puis j'analyse leur erreur et leur convergence." data-ar="محاكاة بلغة Python للحركة على منحنى الدويري، منمذجة بمعادلة تفاضلية عادية. أنجزتُ فيها خمس طرق عددية وقارنتُ بينها، ثم حللتُ الخطأ والتقارب لكل طريقة.">A Python simulation of motion along a cycloid, modeled as an ordinary differential equation. I implemented and compared five numerical methods, then analyzed their error and convergence.</p>
+        <ul class="pts">
+          <li data-fr="Euler explicite, implicite et modifiée ; Runge-Kutta d'ordre 2 et 4" data-ar="أويلر الصريحة والضمنية والمعدّلة؛ رونج-كوتا من الرتبة 2 و 4">Explicit, implicit and modified Euler; Runge-Kutta orders 2 and 4</li>
+          <li data-fr="Comparaison de la précision et de l'ordre de convergence de chaque schéma" data-ar="مقارنة الدقة ورتبة التقارب لكل طريقة">Compared the accuracy and order of convergence of each scheme</li>
+        </ul>
+        <ul class="tags"><li class="ltr">Python</li><li class="ltr">Jupyter</li><li data-fr="Analyse numérique" data-ar="التحليل العددي">Numerical analysis</li><li data-fr="EDO" data-ar="معادلات تفاضلية">ODEs</li></ul>
+      </article>
+
+      <article class="proj">
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 150">
+            <line class="v-track" x1="70" y1="88" x2="330" y2="88"/>
+            <line class="v-prog" x1="70" y1="88" x2="330" y2="88"/>
+            <circle class="v-node" cx="70" cy="88" r="13"/>
+            <circle class="v-node n2" cx="200" cy="88" r="13"/>
+            <circle class="v-node n3" cx="330" cy="88" r="13"/>
+            <path class="v-check" d="M323 88l5 5 9-10"/>
+            <g class="v-doc"><rect x="56" y="20" width="28" height="36" rx="4"/><path d="M62 31h16M62 38h16M62 45h10"/></g>
+            <text x="70" y="130" data-fr="Dépôt" data-ar="إيداع">Submit</text>
+            <text x="200" y="130" data-fr="Suivi" data-ar="تتبع">Track</text>
+            <text x="330" y="130" data-fr="Traitement" data-ar="معالجة">Process</text>
+          </svg>
+        </div>
+        <p class="kind" data-fr="Application web · Stage" data-ar="تطبيق ويب · تدريب">Web application · Internship</p>
+        <h3 data-fr="Mowatin" data-ar="مواطن (Mowatin)">Mowatin</h3>
+        <p class="desc" data-fr="Plateforme de services citoyens pour la Commune de Ghafsai : dépôt, suivi et traitement en ligne des demandes de documents administratifs, pour les habitants comme pour le personnel." data-ar="منصة خدمات للمواطنين لفائدة جماعة غفساي: إيداع طلبات الوثائق الإدارية وتتبعها ومعالجتها عبر الإنترنت، للسكان والموظفين معًا.">A citizen services platform for the Commune of Ghafsai: residents submit and track administrative document requests online, and staff process them.</p>
+        <ul class="tags ltr"><li>Laravel</li><li>PHP</li><li>JavaScript</li><li>Bootstrap</li><li>MySQL</li></ul>
+      </article>
+
+      <article class="proj">
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 150">
+            <rect class="r-reader" x="36" y="38" width="96" height="74" rx="12"/>
+            <circle class="r-dot" cx="64" cy="76" r="5"/>
+            <path class="r-wave" d="M76 66a14 14 0 0 1 0 20"/>
+            <path class="r-wave w2" d="M86 58a25 25 0 0 1 0 36"/>
+            <path class="r-wave w3" d="M96 50a37 37 0 0 1 0 52"/>
+            <circle class="r-led" cx="118" cy="50" r="4"/>
+            <g class="r-card"><rect x="196" y="56" width="62" height="40" rx="6"/><rect class="chip" x="204" y="64" width="12" height="10" rx="2"/><path d="M204 86h30"/></g>
+            <rect class="r-box" x="292" y="40" width="16" height="16" rx="4"/><path class="r-tick t1" d="M296 48l3 3 6-7"/><line class="r-row" x1="320" y1="48" x2="372" y2="48"/><rect class="r-box" x="292" y="68" width="16" height="16" rx="4"/><path class="r-tick t2" d="M296 76l3 3 6-7"/><line class="r-row" x1="320" y1="76" x2="356" y2="76"/><rect class="r-box" x="292" y="96" width="16" height="16" rx="4"/><path class="r-tick t3" d="M296 104l3 3 6-7"/><line class="r-row" x1="320" y1="104" x2="366" y2="104"/>
+            <text x="84" y="134">RFID</text>
+            <text x="332" y="134" data-fr="Présences" data-ar="الحضور">Attendance</text>
+          </svg>
+        </div>
+        <p class="kind" data-fr="Systèmes embarqués · Projet académique" data-ar="أنظمة مدمجة · مشروع أكاديمي">Embedded systems · Academic project</p>
+        <h3 data-fr="Système de présence RFID" data-ar="نظام تسجيل الحضور بتقنية RFID">RFID attendance system</h3>
+        <p class="desc" data-fr="Système de gestion des présences automatisé, construit autour d'un lecteur RFID Arduino et d'une interface web, réalisé en binôme." data-ar="نظام آلي لتدبير الحضور، مبني على قارئ RFID مع Arduino وواجهة ويب، أُنجز ضمن فريق من شخصين.">An automated attendance system built around an Arduino RFID reader with a web interface, developed in a team of two.</p>
+        <ul class="tags ltr"><li>Arduino</li><li>C</li><li>PHP</li><li>JavaScript</li></ul>
+      </article>
+
+      <article class="proj wide">
+        <div class="viz crop" aria-hidden="true">
+          <svg viewBox="0 0 1000 150" preserveAspectRatio="xMinYMid slice">
+            <line class="d-axis" x1="36" y1="130" x2="360" y2="130"/>
+            <rect class="d-bar" style="animation-delay:0.0s" x="50" y="90" width="24" height="40" rx="4"/><rect class="d-bar" style="animation-delay:0.1s" x="88" y="68" width="24" height="62" rx="4"/><rect class="d-bar" style="animation-delay:0.2s" x="126" y="80" width="24" height="50" rx="4"/><rect class="d-bar" style="animation-delay:0.3s" x="164" y="52" width="24" height="78" rx="4"/><rect class="d-bar" style="animation-delay:0.4s" x="202" y="64" width="24" height="66" rx="4"/><rect class="d-bar" style="animation-delay:0.5s" x="240" y="38" width="24" height="92" rx="4"/><rect class="d-bar" style="animation-delay:0.6s" x="278" y="46" width="24" height="84" rx="4"/><rect class="d-bar" style="animation-delay:0.7s" x="316" y="26" width="24" height="104" rx="4"/>
+            <line class="d-grid" x1="410" y1="40" x2="800" y2="40"/><line class="d-grid" x1="410" y1="85" x2="800" y2="85"/><line class="d-axis" x1="410" y1="130" x2="800" y2="130"/>
+            <polyline class="d-line" pathLength="1" points="430,108 480,90 530,98 580,68 630,76 680,48 730,56 780,28"/>
+            <circle class="d-pt" cx="780" cy="28" r="6"/>
+            <circle class="d-ring" cx="900" cy="76" r="44"/>
+            <circle class="d-arc" pathLength="100" cx="900" cy="76" r="44" transform="rotate(-90 900 76)"/>
+          </svg>
+        </div>
+        <p class="kind" data-fr="En préparation · Données et tableaux de bord" data-ar="قيد الإعداد · بيانات ولوحات قيادة">In planning · Data &amp; dashboards</p>
+        <h3 data-fr="Application de gestion pour un département HSE" data-ar="تطبيق لتدبير قسم HSE">HSE department management app</h3>
+        <p class="desc" data-fr="Projet en cours de cadrage avec un collègue : une application pour gérer les permis de travail, les employés, les formations et les séances de sensibilisation, avec des tableaux de bord et des indicateurs qui mettent en pratique mes études en science des données." data-ar="مشروع في طور التحديد مع زميل: تطبيق لتدبير تصاريح العمل والموظفين والتكوينات وحصص التوعية، مع لوحات قيادة ومؤشرات تطبّق ما أدرسه في علوم البيانات.">A project I'm scoping with a colleague: an application to manage work permits, employees, trainings and awareness sessions, with dashboards and KPIs that put my data science studies into practice.</p>
+        <ul class="tags"><li class="ltr">Python</li><li class="ltr">SQL</li><li data-fr="Tableaux de bord" data-ar="لوحات القيادة">Dashboards</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head"><span class="n ltr">04</span><h2 data-fr="Formation" data-ar="الدراسة">Education</h2></div>
+    <div class="tl">
+      <div class="item">
+        <div class="when"><span data-fr="2026 — en cours" data-ar="2026 — إلى الآن">2026 — present</span></div>
+        <div>
+          <h3 data-fr="Bachelor — Science des Données et Systèmes Intelligents (SDSI)" data-ar="بكالوريوس — علوم البيانات والأنظمة الذكية (SDSI)">Bachelor's — Data Science and Intelligent Systems (SDSI)</h3>
+          <p class="where" data-fr="École Supérieure de Technologie de Dakhla" data-ar="المدرسة العليا للتكنولوجيا بالداخلة">École Supérieure de Technologie de Dakhla</p>
+          <ul class="tags"><li data-fr="Langage R" data-ar="لغة R">R</li><li data-fr="Python avancé" data-ar="Python المتقدم">Advanced Python</li><li data-fr="Probabilités et statistiques" data-ar="الاحتمالات والإحصاء">Probability &amp; statistics</li><li data-fr="Bases de données (Merise, SQL)" data-ar="قواعد البيانات (Merise، SQL)">Databases (Merise, SQL)</li><li class="ltr">Cloud &amp; MLOps</li><li data-fr="IA avancée" data-ar="الذكاء الاصطناعي المتقدم">Advanced AI</li></ul>
+        </div>
+      </div>
+      <div class="item">
+        <div class="when ltr">2025 — 2026</div>
+        <div>
+          <h3 data-fr="Master d'Excellence MAIM — 1re année (M1)" data-ar="ماستر التميز MAIM — السنة الأولى (M1)">Master d'Excellence MAIM — first year (M1)</h3>
+          <p class="where" data-fr="Mathématiques Appliquées à l'Intelligence des Machines · Faculté Polydisciplinaire de Nador" data-ar="الرياضيات التطبيقية في ذكاء الآلة · الكلية المتعددة التخصصات بالناظور">Applied Mathematics for Machine Intelligence · Faculté Polydisciplinaire de Nador</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="when ltr">2024 — 2025</div>
+        <div>
+          <h3 data-fr="Licence d'Excellence MAIM" data-ar="إجازة التميز MAIM">Licence d'Excellence MAIM</h3>
+          <p class="where" data-fr="Mathématiques Appliquées à l'Intelligence des Machines · Faculté Polydisciplinaire de Nador" data-ar="الرياضيات التطبيقية في ذكاء الآلة · الكلية المتعددة التخصصات بالناظور">Applied Mathematics for Machine Intelligence · Faculté Polydisciplinaire de Nador</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="when ltr">2021 — 2023</div>
+        <div>
+          <h3 data-fr="DUT en Informatique" data-ar="الدبلوم الجامعي للتكنولوجيا (DUT) في المعلوميات">DUT in Computer Science</h3>
+          <p class="where" data-fr="École Supérieure de Technologie de Guelmim" data-ar="المدرسة العليا للتكنولوجيا بكلميم">École Supérieure de Technologie de Guelmim</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="when ltr">2021</div>
+        <div>
+          <h3 data-fr="Baccalauréat Sciences Physiques" data-ar="بكالوريا العلوم الفيزيائية">Baccalaureate, Physical Sciences</h3>
+          <p class="where" data-fr="Lycée Imam Choutaibi, Ghafsai" data-ar="ثانوية الإمام الشطيبي، غفساي">Lycée Imam Choutaibi, Ghafsai</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><span class="n ltr">05</span><h2 data-fr="Compétences" data-ar="المهارات">Skills</h2></div>
+    <div class="skills">
+      <div><h3 data-fr="Données et calcul" data-ar="البيانات والحساب">Data &amp; computing</h3><ul class="tags ltr"><li>Python</li><li>R</li><li>SQL</li><li>MySQL</li><li>PL/SQL</li><li>Jupyter</li><li>IBM SPSS</li><li>Excel</li><li>PARI/GP</li></ul></div>
+      <div><h3 data-fr="Développement web" data-ar="تطوير الويب">Web development</h3><ul class="tags ltr"><li>PHP</li><li>Laravel</li><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Bootstrap</li><li>WordPress</li></ul></div>
+      <div><h3 data-fr="Programmation" data-ar="البرمجة">Programming</h3><ul class="tags ltr"><li>C</li><li>C++</li><li>Java</li><li>Arduino</li><li>Linux</li></ul></div>
+      <div><h3 data-fr="Mathématiques" data-ar="الرياضيات">Mathematics</h3><ul class="tags"><li data-fr="Méthodes numériques" data-ar="الطرق العددية">Numerical methods</li><li data-fr="Équations différentielles" data-ar="المعادلات التفاضلية">Differential equations</li><li data-fr="Statistiques" data-ar="الإحصاء">Statistics</li></ul></div>
+      <div><h3 data-fr="Outils" data-ar="الأدوات">Tools</h3><ul class="tags ltr"><li>Microsoft Office</li><li>Photoshop</li><li>Premiere Pro</li></ul></div>
+      <div><h3 data-fr="Langues" data-ar="اللغات">Languages</h3><ul class="tags"><li data-fr="Arabe (natif)" data-ar="العربية (اللغة الأم)">Arabic (native)</li><li data-fr="Anglais (courant)" data-ar="الإنجليزية (بطلاقة)">English (fluent)</li><li data-fr="Français (intermédiaire)" data-ar="الفرنسية (متوسط)">French (intermediate)</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <h2 data-fr="Travaillons ensemble." data-ar="لنعمل معًا.">Let's work together.</h2>
+      <p data-fr="Ouvert aux stages, aux collaborations et aux projets en data, en IA ou en développement logiciel. Le plus simple est de m'écrire." data-ar="منفتح على التداريب والتعاون والمشاريع في مجالات البيانات والذكاء الاصطناعي وتطوير البرمجيات. أفضل وسيلة للتواصل هي البريد الإلكتروني.">Open to internships, collaborations and projects in data, AI or software development. Email is the best way to reach me.</p>
+      <div class="cta">
+        <a class="btn primary ltr" href="mailto:mohamedhaddady8@gmail.com">mohamedhaddady8@gmail.com</a>
+        <a class="btn ltr" href="https://www.linkedin.com/in/mohamed-el-haddady-172457238" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ltr" href="https://github.com/mohamedel-web" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer><div class="wrap">© <span class="ltr" id="yr">2026</span> <span data-fr="Mohamed El-Haddady · Dakhla" data-ar="محمد الحدادي · الداخلة">Mohamed El-Haddady · Dakhla</span></div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+
+  // ----- Languages: English lives in the markup, French in data-fr, Arabic in data-ar.
+  var nodes=document.querySelectorAll('[data-fr]'), langBtns=document.querySelectorAll('[data-lang]');
+  nodes.forEach(function(n){n.dataset.en=n.innerHTML;});
+  function setLang(l){
+    nodes.forEach(function(n){n.innerHTML=n.dataset[l]||n.dataset.en;});
+    root.lang=l; root.dir=l==='ar'?'rtl':'ltr';
+    langBtns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===l));});
+    try{localStorage.setItem('lang',l);}catch(e){}
+  }
+  langBtns.forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang);});});
+  setLang(root.lang);
+
+  // ----- Light / dark theme
+  document.getElementById('theme').addEventListener('click',function(){
+    var t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',t);
+    try{localStorage.setItem('theme',t);}catch(e){}
+  });
+
+  // ----- Mobile menu
+  var menu=document.getElementById('menu'), links=document.getElementById('links');
+  function closeMenu(){links.classList.remove('open');menu.setAttribute('aria-expanded','false');}
+  menu.addEventListener('click',function(){
+    var o=links.classList.toggle('open'); menu.setAttribute('aria-expanded',String(o));
+  });
+  links.addEventListener('click',function(e){if(e.target.tagName==='A') closeMenu();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') closeMenu();});
+
+  // ----- Photo: show profile.jpg when it exists, otherwise keep the placeholder.
+  var box=document.getElementById('photo'), img=new Image();
+  img.alt='Mohamed El-Haddady';
+  img.onload=function(){box.innerHTML='';box.appendChild(img);box.classList.add('has-img');};
+  img.src='profile.jpg';
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // ----- Cycloid traced by a rolling circle
+  var W=window.matchMedia('(max-width: 700px)').matches?520:1000;
+  var r=50, base=130, x0=30, tMax=(W-2*x0)/r, cs=document.getElementById('cycPath').ownerSVGElement;
+  cs.setAttribute('viewBox','0 0 '+W+' 150'); cs.querySelector('.c-base').setAttribute('x2',W);
+  var path=document.getElementById('cycPath'), wheel=document.getElementById('cycWheel'),
+      spoke=document.getElementById('cycSpoke'), dot=document.getElementById('cycDot');
+  function pt(t){return [x0+r*(t-Math.sin(t)), base-r*(1-Math.cos(t))];}
+  function draw(T){
+    var d='', n=Math.max(2,Math.ceil(T*20));
+    for(var i=0;i<=n;i++){var p=pt(T*i/n); d+=(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}
+    path.setAttribute('d',d);
+    var q=pt(T), cx=x0+r*T, cy=base-r;
+    wheel.setAttribute('cx',cx); wheel.setAttribute('cy',cy);
+    spoke.setAttribute('x1',cx); spoke.setAttribute('y1',cy); spoke.setAttribute('x2',q[0]); spoke.setAttribute('y2',q[1]);
+    dot.setAttribute('cx',q[0]); dot.setAttribute('cy',q[1]);
+  }
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){draw(tMax);return;}
+  var start=null, dur=9000, hold=1500;
+  function frame(ts){
+    if(start===null) start=ts;
+    draw(Math.min(1,((ts-start)%(dur+hold))/dur)*tMax);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
