@@ -217,6 +217,33 @@ h3{font-weight:600;font-size:clamp(18px,1.8vw,21px);line-height:1.3;margin:0 0 4
 @media(max-width:520px){.contact .cta .btn{width:100%}}
 footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
 
+[hidden]{display:none !important}
+
+/* why work with me */
+.why-h{font-size:clamp(19px,2vw,22px);margin:clamp(30px,4vw,44px) 0 16px}
+.why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.why>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;transition:border-color .2s,transform .2s}
+.why>div:hover{border-color:var(--accent);transform:translateY(-2px)}
+.why .ic{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:14px}
+.why .ic svg{width:22px;height:22px}
+.why h4{font-family:var(--display);color:var(--ink);font-size:16.5px;line-height:1.3;margin:0 0 6px}
+.why p{margin:0;font-size:15px}
+@media(max-width:960px){.why{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.why{grid-template-columns:1fr}}
+
+/* hackathon visual */
+.h-line{stroke:var(--accent2);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:hline 6s infinite}
+.h-node{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+.h-core{fill:var(--accent);transform-box:fill-box;transform-origin:center;animation:hcore 2s ease-in-out infinite}
+.h-star{fill:var(--accent-ink)}
+@keyframes hline{0%,8%{stroke-dashoffset:1;opacity:1}38%,88%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes hcore{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+
+/* back to top */
+.totop{position:fixed;bottom:20px;inset-inline-end:20px;width:46px;height:46px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;box-shadow:var(--shadow);cursor:pointer;z-index:15;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s,transform .25s}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+.totop svg{width:20px;height:20px}
+
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important}}
 </style>
 </head>
@@ -262,6 +289,7 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
       <div class="cta">
         <a class="btn primary" href="#projects" data-fr="Voir mes projets" data-ar="شاهد مشاريعي">See my projects</a>
         <a class="btn" href="#contact" data-fr="Me contacter" data-ar="تواصل معي">Get in touch</a>
+        <a class="btn cv-btn" href="cv.pdf" download="CV-Mohamed-El-Haddady.pdf" hidden data-fr="Télécharger mon CV" data-ar="تحميل السيرة الذاتية">Download CV</a>
       </div>
     </div>
 
@@ -279,7 +307,7 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
 
   <div class="stats">
     <div><b class="ltr">5</b><span data-fr="ans d'études en informatique, maths et data" data-ar="سنوات دراسة في المعلوميات والرياضيات والبيانات">years studying computing, maths and data</span></div>
-    <div><b class="ltr">4</b><span data-fr="projets, du calcul numérique au web" data-ar="مشاريع، من الحساب العددي إلى الويب">projects, from numerical computing to web</span></div>
+    <div><b class="ltr">5</b><span data-fr="projets, du calcul numérique au web" data-ar="مشاريع، من الحساب العددي إلى الويب">projects, from numerical computing to web</span></div>
     <div><b class="ltr">2</b><span data-fr="stages en développement web" data-ar="تدريبان في تطوير الويب">web development internships</span></div>
     <div><b class="ltr">3</b><span data-fr="langues : arabe, anglais, français" data-ar="لغات: العربية، الإنجليزية، الفرنسية">languages: Arabic, English, French</span></div>
   </div>
@@ -298,6 +326,22 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
         <li><span data-fr="Domaine" data-ar="المجال">Focus</span><span data-fr="Données, reporting, IA" data-ar="البيانات، التقارير، الذكاء الاصطناعي">Data, reporting, AI</span></li>
         <li><span data-fr="Langues" data-ar="اللغات">Languages</span><span data-fr="Arabe, anglais, français" data-ar="العربية، الإنجليزية، الفرنسية">Arabic, English, French</span></li>
       </ul>
+    </div>
+
+    <h3 class="why-h" data-fr="Pourquoi travailler avec moi ?" data-ar="لماذا تعمل معي؟">Why work with me?</h3>
+    <div class="why">
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
+        <h4 data-fr="Des données réelles, chaque jour" data-ar="بيانات حقيقية كل يوم">Real data, every day</h4>
+        <p data-fr="Je collecte, structure et transforme en rapports les données d'un département HSE en activité, pas seulement des jeux de données d'exercice." data-ar="أجمع بيانات قسم HSE في الميدان وأنظّمها وأحوّلها إلى تقارير، وليس فقط بيانات تمارين.">I collect, structure and report on data from a working HSE department, not just practice datasets.</p></div>
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4H6l6 8-6 8h12"/></svg></span>
+        <h4 data-fr="Maths et informatique" data-ar="الرياضيات والمعلوميات">Maths and code</h4>
+        <p data-fr="Un DUT en informatique et une formation en mathématiques appliquées à l'IA : je sais construire l'outil et comprendre le modèle derrière." data-ar="دبلوم في المعلوميات وتكوين في الرياضيات التطبيقية للذكاء الاصطناعي: أستطيع بناء الأداة وفهم النموذج الذي يقف وراءها.">A DUT in computer science plus applied maths for AI: I can build the tool and understand the model behind it.</p></div>
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></span>
+        <h4 data-fr="Autonome de A à Z" data-ar="مستقل من البداية إلى النهاية">Autonomous, end to end</h4>
+        <p data-fr="J'ai conçu et développé seul Mowatin, du besoin de la commune jusqu'à l'application web fonctionnelle." data-ar="صممتُ وطوّرتُ تطبيق «مواطن» وحدي، من حاجة الجماعة إلى تطبيق ويب يعمل.">I designed and built Mowatin on my own, from the commune's needs to a working web app.</p></div>
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/></svg></span>
+        <h4 data-fr="Trois langues" data-ar="ثلاث لغات">Three languages</h4>
+        <p data-fr="Je travaille et rédige en arabe, en français et en anglais, au travail comme dans mes études." data-ar="أعمل وأكتب بالعربية والفرنسية والإنجليزية، في العمل وفي دراستي.">I work and write in Arabic, French and English, at work and in my studies.</p></div>
     </div>
   </section>
 
@@ -404,22 +448,35 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
         <ul class="tags ltr"><li>Arduino</li><li>C</li><li>PHP</li><li>JavaScript</li></ul>
       </article>
 
-      <article class="proj wide">
-        <div class="viz crop" aria-hidden="true">
-          <svg viewBox="0 0 1000 150" preserveAspectRatio="xMinYMid slice">
-            <line class="d-axis" x1="36" y1="130" x2="360" y2="130"/>
-            <rect class="d-bar" style="animation-delay:0.0s" x="50" y="90" width="24" height="40" rx="4"/><rect class="d-bar" style="animation-delay:0.1s" x="88" y="68" width="24" height="62" rx="4"/><rect class="d-bar" style="animation-delay:0.2s" x="126" y="80" width="24" height="50" rx="4"/><rect class="d-bar" style="animation-delay:0.3s" x="164" y="52" width="24" height="78" rx="4"/><rect class="d-bar" style="animation-delay:0.4s" x="202" y="64" width="24" height="66" rx="4"/><rect class="d-bar" style="animation-delay:0.5s" x="240" y="38" width="24" height="92" rx="4"/><rect class="d-bar" style="animation-delay:0.6s" x="278" y="46" width="24" height="84" rx="4"/><rect class="d-bar" style="animation-delay:0.7s" x="316" y="26" width="24" height="104" rx="4"/>
-            <line class="d-grid" x1="410" y1="40" x2="800" y2="40"/><line class="d-grid" x1="410" y1="85" x2="800" y2="85"/><line class="d-axis" x1="410" y1="130" x2="800" y2="130"/>
-            <polyline class="d-line" pathLength="1" points="430,108 480,90 530,98 580,68 630,76 680,48 730,56 780,28"/>
-            <circle class="d-pt" cx="780" cy="28" r="6"/>
-            <circle class="d-ring" cx="900" cy="76" r="44"/>
-            <circle class="d-arc" pathLength="100" cx="900" cy="76" r="44" transform="rotate(-90 900 76)"/>
+      <article class="proj">
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 150">
+            <line class="d-grid" x1="24" y1="48" x2="246" y2="48"/><line class="d-grid" x1="24" y1="89" x2="246" y2="89"/>
+            <line class="d-axis" x1="24" y1="130" x2="246" y2="130"/>
+            <rect class="d-bar" style="animation-delay:0.0s" x="34" y="90" width="17" height="40" rx="3"/><rect class="d-bar" style="animation-delay:0.1s" x="60" y="68" width="17" height="62" rx="3"/><rect class="d-bar" style="animation-delay:0.2s" x="86" y="80" width="17" height="50" rx="3"/><rect class="d-bar" style="animation-delay:0.3s" x="112" y="52" width="17" height="78" rx="3"/><rect class="d-bar" style="animation-delay:0.4s" x="138" y="64" width="17" height="66" rx="3"/><rect class="d-bar" style="animation-delay:0.5s" x="164" y="38" width="17" height="92" rx="3"/><rect class="d-bar" style="animation-delay:0.6s" x="190" y="46" width="17" height="84" rx="3"/><rect class="d-bar" style="animation-delay:0.7s" x="216" y="26" width="17" height="104" rx="3"/>
+            <circle class="d-ring" cx="320" cy="75" r="44"/>
+            <circle class="d-arc" pathLength="100" cx="320" cy="75" r="44" transform="rotate(-90 320 75)"/>
           </svg>
         </div>
-        <p class="kind" data-fr="En préparation · Données et tableaux de bord" data-ar="قيد الإعداد · بيانات ولوحات قيادة">In planning · Data &amp; dashboards</p>
+        <p class="kind" data-fr="En cours · Données et tableaux de bord" data-ar="قيد الإنجاز · بيانات ولوحات قيادة">In progress · Data &amp; dashboards</p>
         <h3 data-fr="Application de gestion pour un département HSE" data-ar="تطبيق لتدبير قسم HSE">HSE department management app</h3>
-        <p class="desc" data-fr="Projet en cours de cadrage avec un collègue : une application pour gérer les permis de travail, les employés, les formations et les séances de sensibilisation, avec des tableaux de bord et des indicateurs qui mettent en pratique mes études en science des données." data-ar="مشروع في طور التحديد مع زميل: تطبيق لتدبير تصاريح العمل والموظفين والتكوينات وحصص التوعية، مع لوحات قيادة ومؤشرات تطبّق ما أدرسه في علوم البيانات.">A project I'm scoping with a colleague: an application to manage work permits, employees, trainings and awareness sessions, with dashboards and KPIs that put my data science studies into practice.</p>
+        <p class="desc" data-fr="Une application pour le département HSE : permis de travail, employés, formations et séances de sensibilisation, avec tableaux de bord et indicateurs. J'en suis à la phase de conception (modélisation de la base de données), avec un collègue qui prévoit d'y contribuer." data-ar="تطبيق لقسم HSE لتدبير تصاريح العمل والموظفين والتكوينات وحصص التوعية، مع لوحات قيادة ومؤشرات. أنا الآن في مرحلة التصميم (نمذجة قاعدة البيانات)، مع زميل يعتزم المساهمة فيه.">An application for the HSE department to manage work permits, employees, trainings and awareness sessions, with dashboards and KPIs. I'm now in the design phase (database modelling), with a colleague set to contribute.</p>
         <ul class="tags"><li class="ltr">Python</li><li class="ltr">SQL</li><li data-fr="Tableaux de bord" data-ar="لوحات القيادة">Dashboards</li></ul>
+      </article>
+
+      <article class="proj">
+        <div class="viz" aria-hidden="true">
+          <svg viewBox="0 0 400 150">
+            <line class="h-line" pathLength="1" style="animation-delay:0.00s" x1="200" y1="75" x2="80" y2="38"/><line class="h-line" pathLength="1" style="animation-delay:0.18s" x1="200" y1="75" x2="64" y2="108"/><line class="h-line" pathLength="1" style="animation-delay:0.36s" x1="200" y1="75" x2="200" y2="18"/><line class="h-line" pathLength="1" style="animation-delay:0.54s" x1="200" y1="75" x2="320" y2="38"/><line class="h-line" pathLength="1" style="animation-delay:0.72s" x1="200" y1="75" x2="336" y2="108"/><line class="h-line" pathLength="1" style="animation-delay:0.90s" x1="200" y1="75" x2="200" y2="132"/>
+            <circle class="h-node" cx="80" cy="38" r="9"/><circle class="h-node" cx="64" cy="108" r="9"/><circle class="h-node" cx="200" cy="18" r="9"/><circle class="h-node" cx="320" cy="38" r="9"/><circle class="h-node" cx="336" cy="108" r="9"/><circle class="h-node" cx="200" cy="132" r="9"/>
+            <circle class="h-core" cx="200" cy="75" r="20"/>
+            <path class="h-star" d="M200 62l3.5 9.5 9.5 3.5-9.5 3.5-3.5 9.5-3.5-9.5-9.5-3.5 9.5-3.5z"/>
+          </svg>
+        </div>
+        <p class="kind" data-fr="Hackathon · EST Dakhla · 2026" data-ar="هاكاثون · EST الداخلة · 2026">Hackathon · EST Dakhla · 2026</p>
+        <h3 data-fr="Jeunes contre les violences faites aux femmes et aux filles" data-ar="شباب ضد العنف تجاه النساء والفتيات">Youth against violence toward women and girls</h3>
+        <p class="desc" data-fr="Participation au hackathon universitaire de l'EST Dakhla avec une idée d'outil numérique, en cours de développement." data-ar="مشاركة في الهاكاثون الجامعي بالمدرسة العليا للتكنولوجيا بالداخلة بفكرة أداة رقمية قيد التطوير.">Taking part in the EST Dakhla university hackathon with an idea for a digital tool, now being developed.</p>
+        <ul class="tags"><li class="ltr">Hackathon</li><li data-fr="Outil numérique" data-ar="أداة رقمية">Digital tool</li></ul>
       </article>
     </div>
   </section>
@@ -484,6 +541,7 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
       <p data-fr="Ouvert aux stages, aux collaborations et aux projets en data, en IA ou en développement logiciel. Le plus simple est de m'écrire." data-ar="منفتح على التداريب والتعاون والمشاريع في مجالات البيانات والذكاء الاصطناعي وتطوير البرمجيات. أفضل وسيلة للتواصل هي البريد الإلكتروني.">Open to internships, collaborations and projects in data, AI or software development. Email is the best way to reach me.</p>
       <div class="cta">
         <a class="btn primary ltr" href="mailto:mohamedhaddady8@gmail.com">mohamedhaddady8@gmail.com</a>
+        <a class="btn cv-btn" href="cv.pdf" download="CV-Mohamed-El-Haddady.pdf" hidden data-fr="Télécharger mon CV" data-ar="تحميل السيرة الذاتية">Download CV</a>
         <a class="btn ltr" href="https://www.linkedin.com/in/mohamed-el-haddady-172457238" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn ltr" href="https://github.com/mohamedel-web" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -492,6 +550,8 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
 
 </div>
 </main>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <footer><div class="wrap">© <span class="ltr" id="yr">2026</span> <span data-fr="Mohamed El-Haddady · Dakhla" data-ar="محمد الحدادي · الداخلة">Mohamed El-Haddady · Dakhla</span></div></footer>
 
@@ -534,6 +594,17 @@ footer{padding:26px 0 44px;font-size:13px;color:var(--muted)}
   img.src='profile.jpg';
 
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // ----- CV buttons: shown only once a cv.pdf file exists next to this page.
+  fetch('cv.pdf',{method:'HEAD'}).then(function(r){
+    var t=(r.headers.get('content-type')||'').toLowerCase();
+    if(r.ok && t.indexOf('pdf')>-1) document.querySelectorAll('.cv-btn').forEach(function(b){b.hidden=false;});
+  }).catch(function(){});
+
+  // ----- Back to top
+  var top=document.getElementById('totop');
+  window.addEventListener('scroll',function(){top.classList.toggle('show',window.scrollY>700);},{passive:true});
+  top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
   // ----- Cycloid traced by a rolling circle
   var W=window.matchMedia('(max-width: 700px)').matches?520:1000;
